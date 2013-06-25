@@ -49,7 +49,7 @@ const unsigned cw_en=10;
 #endif
 
 #define NUM_BUFFERS 2
-#define PAGE_ALIGN(n)   ((n + PAGE_SIZE - 1) & PAGE_MASK)
+
 typedef struct {
     GGLSurface texture;
     unsigned cwidth;
@@ -175,7 +175,7 @@ static int get_framebuffer(GGLSurface *fb)
     fb->width = vi.xres;
     fb->height = vi.yres;
     fb->stride = fi.line_length/PIXEL_SIZE;
-    fb->data = (void*) (((unsigned) bits) + PAGE_ALIGN(vi.yres * fi.line_length));
+    fb->data = (void*) (((unsigned) bits) + vi.yres * fi.line_length);
     fb->format = PIXEL_FORMAT;
     memset(fb->data, 0, vi.yres * fi.line_length);
 
